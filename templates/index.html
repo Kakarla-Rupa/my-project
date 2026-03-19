@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioSense | Premium AI Diagnostics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Cinematic Background Elements -->
+    <div class="background-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container">
+        <div class="glass-card stagger-1">
+            <div class="noise"></div>
+            
+            <header>
+                <div class="logo">
+                    <div class="icon-wrapper tilt-element">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h1>Cardio<span class="gradient-text">Sense AI</span></h1>
+                </div>
+                <div class="header-badge">
+                    <div class="pulse-dot"></div>
+                    <span>Quantum Diagnostics Engine Active</span>
+                </div>
+                <p class="subtitle">
+                    Enter clinical parameters below. Our neural architecture processes 13 dimensional biomarkers to generate an instant, highly accurate cardiovascular risk topology.
+                </p>
+            </header>
+
+            <form action="/predict" method="post" class="prediction-form">
+                
+                <!-- Section 1 -->
+                <div class="form-section stagger-2 tilt-section">
+                    <div class="section-glow"></div>
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <h2>Patient Profile</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="age">Age (Years)</label>
+                            <input type="number" id="age" name="age" placeholder="e.g. 45" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="sex">Biological Sex</label>
+                            <select name="sex" id="sex">
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                            <div class="input-border-glow"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="form-section stagger-3 tilt-section">
+                    <div class="section-glow"></div>
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-wave-square"></i></div>
+                        <h2>Vitals & Symptoms</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="cp" title="0: Typical Angina, 1: Atypical Angina, 2: Non-anginal, 3: Asymptomatic">Chest Pain Type (0-3)</label>
+                            <input type="number" id="cp" name="cp" min="0" max="3" placeholder="0-3" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="trestbps">Resting BP (mm Hg)</label>
+                            <input type="number" id="trestbps" name="trestbps" placeholder="e.g. 120" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="thalach">Max Heart Rate</label>
+                            <input type="number" id="thalach" name="thalach" placeholder="e.g. 150" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="exang">Exercise Angina (1=Yes, 0=No)</label>
+                            <input type="number" id="exang" name="exang" min="0" max="1" placeholder="1 or 0" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="form-section stagger-4 tilt-section">
+                    <div class="section-glow"></div>
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-dna"></i></div>
+                        <h2>Clinical Metrics</h2>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="chol">Serum Cholesterol (mg/dl)</label>
+                            <input type="number" id="chol" name="chol" placeholder="e.g. 200" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="fbs">Fasting Blood Sugar > 120 (1/0)</label>
+                            <input type="number" id="fbs" name="fbs" min="0" max="1" placeholder="1 or 0" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="restecg">Resting ECG Results (0-2)</label>
+                            <input type="number" id="restecg" name="restecg" min="0" max="2" placeholder="0-2" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="oldpeak">ST Depression (Oldpeak)</label>
+                            <input type="number" step="0.1" id="oldpeak" name="oldpeak" placeholder="e.g. 1.0" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="slope">ST Segment Slope (0-2)</label>
+                            <input type="number" id="slope" name="slope" min="0" max="2" placeholder="0-2" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="ca">Fluoroscopy Checked Vessels (0-4)</label>
+                            <input type="number" id="ca" name="ca" min="0" max="4" placeholder="0-4" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="thal">Thalassemia (0-3)</label>
+                            <input type="number" id="thal" name="thal" min="0" max="3" placeholder="0-3" required>
+                            <div class="input-border-glow"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-area stagger-4">
+                    <button type="submit" class="predict-btn hover-tilt">
+                        <div class="btn-shimmer"></div>
+                        <span>Execute Neural Prediction</span>
+                        <div class="btn-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </button>
+                    <div class="ssl-badge">
+                        <div class="shield-pulse"></div>
+                        <i class="fas fa-shield-alt"></i> Military-grade local isolated processing. 100% Data Privacy.
+                    </div>
+                </div>
+            </form>
+
+            {% if prediction_text %}
+            <div class="result-area animate-scale-up" id="result-box">
+                <div class="result-badge tilt-element {{ 'risk' if 'Detected' in prediction_text else 'safe' }}">
+                    <div class="result-glow"></div>
+                    <div class="result-icon-wrapper">
+                        <i class="fas {{ 'fa-radiation' if 'Detected' in prediction_text else 'fa-check-double' }}"></i>
+                    </div>
+                    <div class="result-content">
+                        <h4>Diagnostic Confirmation</h4>
+                        <h3>{{ prediction_text }}</h3>
+                    </div>
+                </div>
+            </div>
+            <script>
+                setTimeout(() => {
+                    document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            </script>
+            {% endif %}
+            
+            <footer class="stagger-5">
+                <p>&copy; 2026 CardioSense Analytics • Built for the Future of Medicine</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- 3D Tilt Library for ultra-premium feel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".tilt-element"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.4,
+            scale: 1.05
+        });
+        
+        VanillaTilt.init(document.querySelectorAll(".tilt-section"), {
+            max: 2,
+            speed: 800,
+            glare: true,
+            "max-glare": 0.05,
+            gyroscope: false
+        });
+    </script>
+</body>
+</html>

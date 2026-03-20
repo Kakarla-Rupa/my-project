@@ -1,3 +1,6 @@
+from flask import Flask, render_template, request
+import pandas as pd
+import joblib
 import logging
 
 # Configure logging
@@ -13,19 +16,16 @@ try:
 except Exception as e:
     logger.error(f"Error loading model: {e}")
 
-# Feature names (same order as dataset)
+# Feature names
 columns = [
     "age", "sex", "cp", "trestbps", "chol", "fbs",
     "restecg", "thalach", "exang", "oldpeak",
     "slope", "ca", "thal"
 ]
 
-
-
 @app.route("/")
 def home():
     return render_template("index.html")
-
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -44,21 +44,16 @@ def predict():
         ca = float(request.form["ca"])
         thal = float(request.form["thal"])
 
-        # Convert input to dataframe
         input_data = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs,
-                                    restecg, thalach, exang, oldpeak,
-                                    slope, ca, thal]], columns=columns)
+                                   restecg, thalach, exang, oldpeak,
+                                   slope, ca, thal]], columns=columns)
 
-        # Prediction
         prediction = model.predict(input_data)[0]
-
-        # Probability
         probability = model.predict_proba(input_data)
 
         risk_prob = round(probability[0][0] * 100, 2)
         safe_prob = round(probability[0][1] * 100, 2)
 
-        # Label interpretation
         if prediction == 0:
             result = f"⚠️ Heart Disease Detected ({risk_prob}% risk)"
         else:
@@ -68,12 +63,9 @@ def predict():
 
     except Exception as e:
         logger.error(f"Prediction error: {e}")
-        return render_template("index.html", prediction_text="❌ Error processing prediction. Please check inputs.")
-
-
-
+        return render_template("index.html", prediction_text="❌ Error processing prediction.")
 
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port)
